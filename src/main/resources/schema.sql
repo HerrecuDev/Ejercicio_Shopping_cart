@@ -65,19 +65,30 @@
 --   - order_item has missing ENGINE specification (should match customer_order)
 --   - Potential typos detected: 'shiping_street', 'shipping_postal_cod'
 -- =====================================================================
-use shopping_cart;
+CREATE DATABASE IF NOT EXISTS shopping_cart;
+USE shopping_cart;
 
 CREATE TABLE IF NOT EXISTS order_item (
     id INT PRIMARY KEY AUTO_INCREMENT,
+    order_id INT NOT NULL,
     product_name VARCHAR(255) NOT NULL,
     unit_price DECIMAL(10, 2) NOT NULL,
     quantity INT NOT NULL,
     line_total DECIMAL(10, 2) NOT NULL,
-    order_id INT NOT NULL,
-    product_id INT NOT NULL,  -- Added product_id as a foreign key
-    FOREIGN KEY (order_id) REFERENCES customer_order(id),
-    FOREIGN KEY (product_id) REFERENCES product(id)  -- Assuming there is a product table
-);
+    FOREIGN KEY (order_id) REFERENCES customer_order(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+CREATE TABLE IF NOT EXISTS product (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    description TEXT,
+    active BOOLEAN NOT NULL DEFAULT TRUE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
 
 CREATE TABLE IF NOT EXISTS customer_order (
     id INT PRIMARY KEY AUTO_INCREMENT,

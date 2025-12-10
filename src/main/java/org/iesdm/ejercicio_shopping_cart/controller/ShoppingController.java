@@ -9,7 +9,4 @@ package org.iesdm.ejercicio_shopping_cart.controller;
 
 @RestController
 @RequestMapping("/api/shopping")
-public class ShoppingController {
 
-
-}
