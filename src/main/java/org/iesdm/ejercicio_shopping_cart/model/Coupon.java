@@ -23,5 +23,7 @@ public class Coupon {
     private LocalDateTime validFrom;
     private LocalDateTime validTo;
 
+
+
     
 }
