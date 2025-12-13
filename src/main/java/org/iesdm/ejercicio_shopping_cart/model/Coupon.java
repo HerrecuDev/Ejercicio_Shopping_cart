@@ -14,16 +14,12 @@ import java.time.LocalDateTime;
 @Builder
 public class Coupon {
 
-    private int id;
+    private Integer id;
     private String code;
     private String description;
-    private String discountType;
-    private double discountValue;
-    private boolean active = true;
+    private String discountType;   // o un enum si el enunciado lo pide
+    private Double discountValue;
+    private Boolean active;
     private LocalDateTime validFrom;
     private LocalDateTime validTo;
-
-
-
-    
 }

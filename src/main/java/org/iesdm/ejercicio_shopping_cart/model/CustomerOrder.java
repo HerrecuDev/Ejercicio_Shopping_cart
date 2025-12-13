@@ -5,20 +5,23 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class customer_order {
+public class CustomerOrder {
 
     private Integer id;
     private String orderNumber;
-    private java.time.LocalDateTime createdAt;
-    private java.time.LocalDateTime updatedAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     private Status status;
-    private java.math.BigDecimal grossTotal;
-    private java.math.BigDecimal discountTotal;
-    private java.math.BigDecimal finalTotal;
+    private BigDecimal grossTotal;
+    private BigDecimal discountTotal;
+    private BigDecimal finalTotal;
     private Integer couponId;
     private PaymentMethod paymentMethod;
     private PaymentStatus paymentStatus;
@@ -53,5 +56,5 @@ public class customer_order {
         COMPLETED,
         FAILED
     }
-   
 }
+

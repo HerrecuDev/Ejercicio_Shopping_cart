@@ -9,9 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Order_item {
+public class OrderItem {
     private Integer id;
-    private Integer orderId;
+    private Integer order_Id;
+    private Integer product_Id;
     private String productName;
     private java.math.BigDecimal unitPrice;
     private Integer quantity;

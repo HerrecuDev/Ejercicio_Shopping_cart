@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pago</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+<body>
+<h1>Pago del pedido</h1>
+
+<p>Número de pedido: <span th:text="${order.orderNumber}">ORD-XXX</span></p>
+<p>Total a pagar: <span th:text="${order.finalTotal}">0.00</span></p>
+
+<form th:action="@{/payment}" method="post" th:object="${order}">
+    <fieldset>
+        <legend>Método de pago</legend>
+        <label>
+            <input type="radio" th:field="*{paymentMethod}" value="CREDIT_CARD" checked>
+            Tarjeta de crédito
+        </label><br>
+        <label>
+            <input type="radio" th:field="*{paymentMethod}" value="PAYPAL">
+            PayPal
+        </label><br>
+        <label>
+            <input type="radio" th:field="*{paymentMethod}" value="BANK_TRANSFER">
+            Transferencia bancaria
+        </label><br>
+    </fieldset>
+
+    <fieldset>
+        <legend>Detalles de pago (simulados)</legend>
+        <textarea th:field="*{paymentDetails}" rows="3"
+                  placeholder="Datos simulados de la operación"></textarea>
+    </fieldset>
+
+    <button type="submit">Confirmar pago</button>
+</form>
+
+<a th:href="@{/checkout}">Volver al checkout</a>
+</body>
+</html>

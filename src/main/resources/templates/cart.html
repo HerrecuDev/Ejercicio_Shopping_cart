@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Carrito de compra</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+<body>
+<div class="card">
+    <div class="header-actions">
+        <h1>Carrito</h1>
+        <a th:href="@{/}" class="button-link">Seguir comprando</a>
+    </div>
+<table>
+    <thead>
+    <tr>
+        <th>Producto</th>
+        <th>Precio unidad</th>
+        <th>Cantidad</th>
+        <th>Total línea</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${items}">
+        <td th:text="${item.productName}">Producto</td>
+        <td th:text="${item.unitPrice}">0.00</td>
+        <td th:text="${item.quantity}">1</td>
+        <td th:text="${item.lineTotal}">0.00</td>
+        <td>
+            <form th:action="@{/cart/remove}" method="post">
+                <input type="hidden" name="itemId" th:value="${item.id}">
+                <button type="submit">Eliminar</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+    <div class="totals">
+        <div class="totals-row">
+            <span>Subtotal</span>
+            <span th:text="${grossTotal}">0.00</span>
+        </div>
+        <div class="totals-row">
+            <span>Descuento</span>
+            <span th:text="${discountTotal}">0.00</span>
+        </div>
+        <div class="totals-row total">
+            <span>Total</span>
+            <span th:text="${finalTotal}">0.00</span>
+        </div>
+    </div>
+
+    <div style="margin-top:1rem;">
+        <a th:href="@{/checkout}" class="button-link">Pasar al checkout</a>
+    </div>
+</div>
+</body>
+</html>

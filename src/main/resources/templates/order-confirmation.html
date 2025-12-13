@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pedido completado</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+<body>
+<h1>¡Gracias por tu compra!</h1>
+
+<p>Tu pedido <strong th:text="${order.orderNumber}">ORD-XXX</strong> se ha completado correctamente.</p>
+<p>Estado: <span th:text="${order.status}">COMPLETED</span></p>
+<p>Importe final: <span th:text="${order.finalTotal}">0.00</span></p>
+
+<h2>Resumen de líneas</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Precio unidad</th>
+        <th>Total línea</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${items}">
+        <td th:text="${item.productName}">Producto</td>
+        <td th:text="${item.quantity}">1</td>
+        <td th:text="${item.unitPrice}">0.00</td>
+        <td th:text="${item.lineTotal}">0.00</td>
+    </tr>
+    </tbody>
+</table>
+
+<a th:href="@{/}">Volver a la tienda</a>

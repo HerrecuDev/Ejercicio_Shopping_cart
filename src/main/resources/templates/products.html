@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping Cart - Productos</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="card">
+    <div class="header-actions">
+        <h1>Catálogo de productos</h1>
+        <a th:href="@{/cart}" class="button-link">Ver carrito</a>
+    </div>
+
+<table>
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Precio</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.name}">Nombre</td>
+        <td th:text="${product.description}">Descripción</td>
+        <td th:text="${#numbers.formatDecimal(product.price, 1, 'COMMA', 2, 'POINT')}">0,00</td>
+        <td>
+            <form th:action="@{/cart/add}" method="post">
+                <input type="hidden" name="productId" th:value="${product.id}">
+                <input type="number" name="quantity" value="1" min="1">
+                <button type="submit">Añadir al carrito</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<a th:href="@{/cart}">Ver carrito</a>
+</body>
+</html>

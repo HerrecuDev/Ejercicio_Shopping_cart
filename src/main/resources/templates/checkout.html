@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+<body>
+<div class="card">
+    <div class="header-actions">
+        <h1>Checkout</h1>
+        <a th:href="@{/cart}" class="button-link">Volver al carrito</a>
+    </div>
+
+    <div th:if="${error}" th:text="${error}" class="error-message"></div>
+
+    <form th:action="@{/checkout}" method="post" th:object="${order}">
+    <fieldset>
+        <legend>Facturación</legend>
+        <label>Nombre:
+            <input type="text" th:field="*{billingName}" required>
+        </label><br>
+        <label>NIF/CIF:
+            <input type="text" th:field="*{billingTaxId}">
+        </label><br>
+        <label>Calle:
+            <input type="text" th:field="*{billingStreet}" required>
+        </label><br>
+        <label>Ciudad:
+            <input type="text" th:field="*{billingCity}" required>
+        </label><br>
+        <label>Código postal:
+            <input type="text" th:field="*{billingPostalCode}" required>
+        </label><br>
+        <label>País:
+            <input type="text" th:field="*{billingCountry}" required>
+        </label><br>
+    </fieldset>
+
+    <fieldset>
+        <legend>Envío</legend>
+        <label>Nombre:
+            <input type="text" th:field="*{shippingName}" required>
+        </label><br>
+        <label>Calle:
+            <input type="text" th:field="*{shippingStreet}" required>
+        </label><br>
+        <label>Ciudad:
+            <input type="text" th:field="*{shippingCity}" required>
+        </label><br>
+        <label>Código postal:
+            <input type="text" th:field="*{shippingPostalCode}" required>
+        </label><br>
+        <label>País:
+            <input type="text" th:field="*{shippingCountry}" required>
+        </label><br>
+    </fieldset>
+
+    <fieldset>
+        <legend>Cupón descuento</legend>
+        <label>Código cupón:
+            <input type="text" name="couponCode" th:value="${couponCode}">
+        </label>
+        <button type="submit" name="action" value="applyCoupon">Aplicar cupón</button>
+    </fieldset>
+
+    <div class="totals">
+        <div class="totals-row">
+            <span>Subtotal</span>
+            <span th:text="${grossTotal}">0.00</span>
+        </div>
+        <div class="totals-row">
+            <span>Descuento</span>
+            <span th:text="${discountTotal}">0.00</span>
+        </div>
+        <div class="totals-row total">
+            <span>Total</span>
+            <span th:text="${finalTotal}">0.00</span>
+        </div>
+    </div>
+
+    <div style="margin-top:1rem;">
+        <button type="submit" name="action" value="continueToPayment">
+            Continuar al pago
+        </button>
+    </div>
+</form>
+</div>
+</body>
+</html>
